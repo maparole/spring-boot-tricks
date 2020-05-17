@@ -1,0 +1,8 @@
+server:
+  port : 8007
+  
+zuul:
+  routes:
+    hello:
+      path: /blabla/john/**
+      url: http://localhost:8007/hello
