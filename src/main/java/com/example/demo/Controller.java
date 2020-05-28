@@ -14,10 +14,13 @@ import org.springframework.web.servlet.HandlerMapping;
 public class Controller {
 	
 	@GetMapping("/whos/**")
-	public String who(HttpServletRequest request) {
+	public String who(HttpServletRequest request) throws Exception {
 		String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		String pattern = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
 		pattern.replaceFirst("\\*\\*", "");
-		return path.substring(path.indexOf(pattern) + pattern.length() - 1);
+		String response = path.substring(path.indexOf(pattern) + pattern.length() - 1);
+		if (response.contains("list"))
+			throw new IllegalAccessException("YOOOO");
+		return response;
 	}
 }
